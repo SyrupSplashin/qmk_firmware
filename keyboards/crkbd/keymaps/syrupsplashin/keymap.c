@@ -86,6 +86,8 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
         case MT(MOD_LSFT, KC_BSPC):
             // Immediately select the hold action when another key is tapped.
             return true;
+        case MT(MOD_LCTL, KC_TAB):
+            return true;
         default:
             // Do not select the hold action when another key is tapped.
             return false;
