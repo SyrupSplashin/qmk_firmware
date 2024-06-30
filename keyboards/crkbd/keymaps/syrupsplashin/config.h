@@ -55,3 +55,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Tappery
 #define TAPPING_TERM_PER_KEY // Tap speed
 #define PERMISSIVE_HOLD_PER_KEY // Tap behavior
+
+// For troubleshooting issue where keyboard isn't working properly during boot
+#define SPLIT_WATCHDOG_ENABLE
