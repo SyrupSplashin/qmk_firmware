@@ -58,3 +58,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // For troubleshooting issue where keyboard isn't working properly during boot
 #define SPLIT_WATCHDOG_ENABLE
+
+// Enables activation of "Caps Word" by doubletapping KC_LSFT
+#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
