@@ -53,19 +53,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       KC_TRNS , KC_TRNS , KC_TRNS ,     KC_TRNS  , KC_0 , KC_TRNS
 ),
 
-//        ┌────┬────┬────┬─────┬─────┬─────┐   ┌──────┬──────┬──────┬──────┬────┬────┐
-//        │ f1 │ f2 │ f3 │ f4  │ f5  │ f6  │   │ pgup │ home │  up  │ end  │ no │ no │
-//        ├────┼────┼────┼─────┼─────┼─────┤   ├──────┼──────┼──────┼──────┼────┼────┤
-//        │ f7 │ f8 │ f9 │ f10 │ f11 │ f12 │   │ pgdn │ left │ down │ rght │ no │ no │
-//        ├────┼────┼────┼─────┼─────┼─────┤   ├──────┼──────┼──────┼──────┼────┼────┤
-//        │ no │ no │ no │ no  │ no  │ no  │   │ pscr │  no  │  no  │ del  │ no │ no │
-//        └────┴────┴────┼─────┼─────┼─────┤   ├──────┼──────┼──────┼──────┴────┴────┘
-//                       │     │     │     │   │      │      │      │
-//                       └─────┴─────┴─────┘   └──────┴──────┴──────┘
+//        ┌────┬────┬────┬─────┬───────┬─────┐   ┌──────┬──────┬──────┬──────┬────┬────┐
+//        │ f1 │ f2 │ f3 │ f4  │  f5   │ f6  │   │ pgup │ home │  up  │ end  │ no │ no │
+//        ├────┼────┼────┼─────┼───────┼─────┤   ├──────┼──────┼──────┼──────┼────┼────┤
+//        │ f7 │ f8 │ f9 │ f10 │  f11  │ f12 │   │ pgdn │ left │ down │ rght │ no │ no │
+//        ├────┼────┼────┼─────┼───────┼─────┤   ├──────┼──────┼──────┼──────┼────┼────┤
+//        │ no │ no │ no │ no  │  no   │ no  │   │ pscr │  no  │  no  │ del  │ no │ no │
+//        └────┴────┴────┼─────┼───────┼─────┤   ├──────┼──────┼──────┼──────┴────┴────┘
+//                       │     │ MO(3) │     │   │      │      │      │
+//                       └─────┴───────┴─────┘   └──────┴──────┴──────┘
 [2] = LAYOUT_split_3x6_3(
       KC_F1   , KC_F2   , KC_F3   , KC_F4   , KC_F5   , KC_F6   ,     KC_PGUP , KC_HOME , KC_UP   , KC_END   , XXXXXXX , XXXXXXX    ,
       KC_F7   , KC_F8   , KC_F9   , KC_F10  , KC_F11  , KC_F12  ,     KC_PGDN , KC_LEFT , KC_DOWN , KC_RIGHT , XXXXXXX , XXXXXXX    ,
       XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,     KC_PSCR , XXXXXXX , XXXXXXX , KC_DEL   , XXXXXXX , XXXXXXX    ,
+                                    _______ , MO(3)   , _______ ,     _______ , _______ , _______
+),
+
+//        ┌────┬────┬──────┬──────┬──────┬─────┐   ┌─────┬─────┬─────┬────┬────┬────┐
+//        │ no │ no │  no  │ volu │  no  │ no  │   │ no  │ no  │ no  │ no │ no │ no │
+//        ├────┼────┼──────┼──────┼──────┼─────┤   ├─────┼─────┼─────┼────┼────┼────┤
+//        │ no │ no │ mprv │ vold │ mnxt │ no  │   │ no  │ no  │ no  │ no │ no │ no │
+//        ├────┼────┼──────┼──────┼──────┼─────┤   ├─────┼─────┼─────┼────┼────┼────┤
+//        │ no │ no │  no  │ mute │  no  │ no  │   │ no  │ no  │ no  │ no │ no │ no │
+//        └────┴────┴──────┼──────┼──────┼─────┤   ├─────┼─────┼─────┼────┴────┴────┘
+//                         │      │      │     │   │     │     │     │
+//                         └──────┴──────┴─────┘   └─────┴─────┴─────┘
+[3] = LAYOUT_split_3x6_3(
+      XXXXXXX , XXXXXXX , XXXXXXX , KC_VOLU , XXXXXXX , XXXXXXX ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX    ,
+      XXXXXXX , XXXXXXX , KC_MPRV , KC_VOLD , KC_MNXT , XXXXXXX ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX    ,
+      XXXXXXX , XXXXXXX , XXXXXXX , KC_MUTE , XXXXXXX , XXXXXXX ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX    ,
                                     _______ , _______ , _______ ,     _______ , _______ , _______
 )
 };
