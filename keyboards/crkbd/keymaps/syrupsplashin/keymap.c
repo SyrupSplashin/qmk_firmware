@@ -85,19 +85,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     _______ , _______ , _______ ,     _______ , _______ , _______
 ),
 
-//        ┌─────┬──────┬───┬─────┬───────┬─────┐   ┌─────┬─────┬─────┬────┬────┬───────┐
-//        │ esc │  no  │ q │  w  │   e   │  r  │   │ no  │ no  │ no  │ no │ no │ DF(0) │
-//        ├─────┼──────┼───┼─────┼───────┼─────┤   ├─────┼─────┼─────┼────┼────┼───────┤
-//        │ tab │ lsft │ a │  s  │   d   │  f  │   │ no  │ no  │ no  │ no │ no │  no   │
-//        ├─────┼──────┼───┼─────┼───────┼─────┤   ├─────┼─────┼─────┼────┼────┼───────┤
-//        │ no  │ lctl │ z │  x  │   c   │  v  │   │ no  │ no  │ no  │ no │ no │  no   │
-//        └─────┴──────┴───┼─────┼───────┼─────┤   ├─────┼─────┼─────┼────┴────┴───────┘
+//        ┌─────┬──────┬───┬─────┬───────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬───────┐
+//        │ esc │  no  │ q │  w  │   e   │  r  │   │     │     │     │     │     │ DF(0) │
+//        ├─────┼──────┼───┼─────┼───────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼───────┤
+//        │ tab │ lsft │ a │  s  │   d   │  f  │   │     │     │     │     │     │       │
+//        ├─────┼──────┼───┼─────┼───────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼───────┤
+//        │ no  │ lctl │ z │  x  │   c   │  v  │   │     │     │     │     │     │       │
+//        └─────┴──────┴───┼─────┼───────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴───────┘
 //                         │     │ MO(5) │ spc │   │     │     │     │
 //                         └─────┴───────┴─────┘   └─────┴─────┴─────┘
 [4] = LAYOUT_split_3x6_3(
-      KC_ESC  , XXXXXXX , KC_Q , KC_W    , KC_E  , KC_R   ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , DF(0)      ,
-      KC_TAB  , KC_LSFT , KC_A , KC_S    , KC_D  , KC_F   ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX    ,
-      XXXXXXX , KC_LCTL , KC_Z , KC_X    , KC_C  , KC_V   ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX    ,
+      KC_ESC  , XXXXXXX , KC_Q , KC_W    , KC_E  , KC_R   ,     KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , DF(0)      ,
+      KC_TAB  , KC_LSFT , KC_A , KC_S    , KC_D  , KC_F   ,     KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS    ,
+      XXXXXXX , KC_LCTL , KC_Z , KC_X    , KC_C  , KC_V   ,     KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS    ,
                                  _______ , MO(5) , KC_SPC ,     _______ , _______ , _______
 ),
 
