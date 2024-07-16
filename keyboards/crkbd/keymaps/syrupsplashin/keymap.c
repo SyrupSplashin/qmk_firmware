@@ -145,5 +145,275 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
             return false;
     }
 }
+// NOTE: Swaps slash/backslash when on linux
+
+uint16_t keycode_config(uint16_t keycode) {
+    switch (keycode) {
+        case KC_CAPS_LOCK:
+        case KC_LOCKING_CAPS_LOCK:
+            if (keymap_config.swap_control_capslock || keymap_config.capslock_to_control) {
+                return KC_LEFT_CTRL;
+            } else if (keymap_config.swap_escape_capslock) {
+                return KC_ESCAPE;
+            }
+            return keycode;
+        case KC_LEFT_CTRL:
+            if (keymap_config.swap_control_capslock) {
+                return KC_CAPS_LOCK;
+            }
+            if (keymap_config.swap_lctl_lgui) {
+                if (keymap_config.no_gui) {
+                    return KC_NO;
+                }
+                return KC_LEFT_GUI;
+            }
+            return KC_LEFT_CTRL;
+        case KC_LEFT_ALT:
+            if (keymap_config.swap_lalt_lgui) {
+                if (keymap_config.no_gui) {
+                    return KC_NO;
+                }
+                return KC_LEFT_GUI;
+            }
+            return KC_LEFT_ALT;
+        case KC_LEFT_GUI:
+            if (keymap_config.swap_lalt_lgui) {
+                return KC_LEFT_ALT;
+            }
+            if (keymap_config.swap_lctl_lgui) {
+                return KC_LEFT_CTRL;
+            }
+            if (keymap_config.no_gui) {
+                return KC_NO;
+            }
+            return KC_LEFT_GUI;
+        case KC_RIGHT_CTRL:
+            if (keymap_config.swap_rctl_rgui) {
+                if (keymap_config.no_gui) {
+                    return KC_NO;
+                }
+                return KC_RIGHT_GUI;
+            }
+            return KC_RIGHT_CTRL;
+        case KC_RIGHT_ALT:
+            if (keymap_config.swap_ralt_rgui) {
+                if (keymap_config.no_gui) {
+                    return KC_NO;
+                }
+                return KC_RIGHT_GUI;
+            }
+            return KC_RIGHT_ALT;
+        case KC_RIGHT_GUI:
+            if (keymap_config.swap_ralt_rgui) {
+                return KC_RIGHT_ALT;
+            }
+            if (keymap_config.swap_rctl_rgui) {
+                return KC_RIGHT_CTRL;
+            }
+            if (keymap_config.no_gui) {
+                return KC_NO;
+            }
+            return KC_RIGHT_GUI;
+        case KC_GRAVE:
+            if (keymap_config.swap_grave_esc) {
+                return KC_ESCAPE;
+            }
+            return KC_GRAVE;
+        case KC_ESCAPE:
+            if (keymap_config.swap_grave_esc) {
+                return KC_GRAVE;
+            } else if (keymap_config.swap_escape_capslock) {
+                return KC_CAPS_LOCK;
+            }
+            return KC_ESCAPE;
+        case KC_BACKSLASH:
+            if (keymap_config.swap_backslash_backspace) {
+                return KC_BACKSPACE;
+#ifdef OS_DETECTION_ENABLE
+            } else if (detected_host_os() == OS_WINDOWS) {
+                return KC_SLASH;
+#endif
+            }
+            return KC_BACKSLASH;
+#ifdef OS_DETECTION_ENABLE
+        case KC_SLASH:
+            if (detected_host_os() == OS_WINDOWS) {
+                return KC_BACKSLASH;
+            }
+            return KC_SLASH;
+#endif
+        case KC_BACKSPACE:
+            if (keymap_config.swap_backslash_backspace) {
+                return KC_BACKSLASH;
+            }
+            return KC_BACKSPACE;
+        default:
+            return keycode;
+    }
+}
 // NOTE: OLED Configuration
-// WIP!
+
+#ifdef OLED_ENABLE
+
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (!is_keyboard_master()) {
+        return OLED_ROTATION_180; // flips the display 180 degrees if offhand
+    }
+    return rotation;
+}
+
+void oled_render_layer_state(void) {
+    oled_write_P(PSTR("Layer: "), false);
+    switch (get_highest_layer(layer_state)) {
+        case 0:
+            oled_write_ln_P(PSTR("Default"), false);
+            break;
+        case 1:
+            oled_write_ln_P(PSTR("Lower"), false);
+            break;
+        case 2:
+            oled_write_ln_P(PSTR("Raise"), false);
+            break;
+        case 3:
+            oled_write_ln_P(PSTR("Adjust"), false);
+            break;
+        default:
+            oled_write_ln_P(PSTR("Undef"), false);
+            break;
+    }
+}
+
+char     keyName = ' ';
+uint16_t last_keycode;
+uint8_t  last_row;
+uint8_t  last_col;
+
+const char PROGMEM code_to_name[60] = {' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\', '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
+
+void set_keylog(uint16_t keycode, keyrecord_t *record) {
+    // save the row and column (useful even if we can't find a keycode to show)
+    last_row = record->event.key.row;
+    last_col = record->event.key.col;
+
+    keyName     = ' ';
+    last_keycode = keycode;
+    if (IS_QK_MOD_TAP(keycode)) {
+        if (record->tap.count) {
+            keycode = QK_MOD_TAP_GET_TAP_KEYCODE(keycode);
+        } else {
+            keycode = 0xE0 + biton(QK_MOD_TAP_GET_MODS(keycode) & 0xF) + biton(QK_MOD_TAP_GET_MODS(keycode) & 0x10);
+        }
+    } else if (IS_QK_LAYER_TAP(keycode) && record->tap.count) {
+        keycode = QK_LAYER_TAP_GET_TAP_KEYCODE(keycode);
+    } else if (IS_QK_MODS(keycode)) {
+        keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
+    } else if (IS_QK_ONE_SHOT_MOD(keycode)) {
+        keycode = 0xE0 + biton(QK_ONE_SHOT_MOD_GET_MODS(keycode) & 0xF) + biton(QK_ONE_SHOT_MOD_GET_MODS(keycode) & 0x10);
+    }
+    if (keycode > ARRAY_SIZE(code_to_name)) {
+        return;
+    }
+
+    // update keylog
+    keyName = pgm_read_byte(&code_to_name[keycode]);
+}
+
+const char *depad_str(const char *depad_str, char depad_char) {
+    while (*depad_str == depad_char)
+        ++depad_str;
+    return depad_str;
+}
+
+void oled_render_keylog(void) {
+    oled_write_char('0' + last_row, false);
+    oled_write_P(PSTR("x"), false);
+    oled_write_char('0' + last_col, false);
+    oled_write_P(PSTR(", k"), false);
+    const char *last_keycode_str = get_u16_str(last_keycode, ' ');
+    oled_write(depad_str(last_keycode_str, ' '), false);
+    oled_write_P(PSTR(":"), false);
+    oled_write_char(keyName, false);
+}
+
+// static void render_bootmagic_status(bool status) {
+//     /* Show Ctrl-Gui Swap options */
+//     static const char PROGMEM logo[][2][3] = {
+//         {{0x97, 0x98, 0}, {0xb7, 0xb8, 0}},
+//         {{0x95, 0x96, 0}, {0xb5, 0xb6, 0}},
+//     };
+//     if (status) {
+//         oled_write_ln_P(logo[0][0], false);
+//         oled_write_ln_P(logo[0][1], false);
+//     } else {
+//         oled_write_ln_P(logo[1][0], false);
+//         oled_write_ln_P(logo[1][1], false);
+//     }
+// }
+
+__attribute__((weak)) void oled_render_logo(void) {
+    // clang-format off
+    const char PROGMEM crkbd_logo[] = {
+        0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
+        0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4,
+        0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4,
+        0};
+    // clang-format on
+    oled_write_P(crkbd_logo, false);
+}
+
+#ifdef OS_DETECTION_ENABLE
+void oled_render_os(void) {
+    oled_write_P(PSTR("OS: "), false);
+    os_variant_t os_type = detected_host_os();
+    switch (os_type) {
+        case OS_LINUX:
+            oled_write_ln_P(PSTR("Linux"), false);
+            break;
+        case OS_WINDOWS:
+            oled_write_ln_P(PSTR("Windows"), false);
+            break;
+        case OS_MACOS:
+            oled_write_ln_P(PSTR("MacOS"), false);
+            break;
+        case OS_IOS:
+            oled_write_ln_P(PSTR("iOS"), false);
+            break;
+#    if 0
+        case OS_WINDOWS_UNSURE:
+            oled_write_ln_P(PSTR("Windows?"), false);
+            break;
+        case OS_PS5:
+            oled_write_ln_P(PSTR("Sony"), false);
+            break;
+        case OS_HANDHELD:
+            oled_write_ln_P(PSTR("Handheld"), false);
+            break;
+#    endif
+        case OS_UNSURE:
+            oled_write_ln_P(PSTR("Unsure"), false);
+            break;
+        default:
+            oled_write_ln(get_u8_str(os_type, ' '), false);
+            break;
+    }
+}
+#endif
+
+bool oled_task_user() {
+    if (is_keyboard_master()) {
+        oled_render_os();
+        oled_render_layer_state();
+        oled_render_keylog();
+    } else {
+        oled_render_logo();
+    }
+    return false;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        set_keylog(keycode, record);
+    }
+    return true;
+}
+#endif // OLED_ENABLE
