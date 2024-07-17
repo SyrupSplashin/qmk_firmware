@@ -19,22 +19,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
+// NOTE: Tap Dance Configuration
+enum {
+    TD_ESC_GRV,
+};
+
+// Tap Dance definitions
+tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for Escape, twice for Caps Lock
+    [TD_ESC_GRV] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_ESC),
+};
+
 // NOTE: Keyboard Layout/Layers
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-//        ┌──────┬─────────────────┬───┬───────┬────────────┬───────────────────┐   ┌────────────────────┬────────────┬────┬───┬─────────────────┬──────┐
-//        │  `   │        '        │ , │   .   │     p      │         y         │   │         f          │     g      │ c  │ r │        l        │  /   │
-//        ├──────┼─────────────────┼───┼───────┼────────────┼───────────────────┤   ├────────────────────┼────────────┼────┼───┼─────────────────┼──────┤
-//        │ lsft │        a        │ o │   e   │     u      │         i         │   │         d          │     h      │ t  │ n │        s        │  -   │
-//        ├──────┼─────────────────┼───┼───────┼────────────┼───────────────────┤   ├────────────────────┼────────────┼────┼───┼─────────────────┼──────┤
-//        │ lgui │ MT(MOD_LALT, ;) │ q │   j   │     k      │         x         │   │         b          │     m      │ w  │ v │ MT(MOD_RALT, z) │ rctl │
-//        └──────┴─────────────────┴───┼───────┼────────────┼───────────────────┤   ├────────────────────┼────────────┼────┼───┴─────────────────┴──────┘
-//                                     │ MO(3) │ LT(1, ent) │ MT(MOD_LCTL, tab) │   │ MT(MOD_LSFT, bspc) │ LT(2, spc) │ no │
-//                                     └───────┴────────────┴───────────────────┘   └────────────────────┴────────────┴────┘
+//        ┌────────────────┬─────────────────┬───┬───────┬────────────┬───────────────────┐   ┌────────────────────┬────────────┬────┬───┬─────────────────┬──────┐
+//        │ TD(TD_ESC_GRV) │        '        │ , │   .   │     p      │         y         │   │         f          │     g      │ c  │ r │        l        │  /   │
+//        ├────────────────┼─────────────────┼───┼───────┼────────────┼───────────────────┤   ├────────────────────┼────────────┼────┼───┼─────────────────┼──────┤
+//        │      lsft      │        a        │ o │   e   │     u      │         i         │   │         d          │     h      │ t  │ n │        s        │  -   │
+//        ├────────────────┼─────────────────┼───┼───────┼────────────┼───────────────────┤   ├────────────────────┼────────────┼────┼───┼─────────────────┼──────┤
+//        │      lgui      │ MT(MOD_LALT, ;) │ q │   j   │     k      │         x         │   │         b          │     m      │ w  │ v │ MT(MOD_RALT, z) │ rctl │
+//        └────────────────┴─────────────────┴───┼───────┼────────────┼───────────────────┤   ├────────────────────┼────────────┼────┼───┴─────────────────┴──────┘
+//                                               │ MO(3) │ LT(1, ent) │ MT(MOD_LCTL, tab) │   │ MT(MOD_LSFT, bspc) │ LT(2, spc) │ no │
+//                                               └───────┴────────────┴───────────────────┘   └────────────────────┴────────────┴────┘
 [0] = LAYOUT_split_3x6_3(
-      KC_GRV  , KC_QUOTE              , KC_COMM , KC_DOT , KC_P            , KC_Y                 ,     KC_F                  , KC_G            , KC_C    , KC_R , KC_L               , KC_SLASH    ,
-      KC_LSFT , KC_A                  , KC_O    , KC_E   , KC_U            , KC_I                 ,     KC_D                  , KC_H            , KC_T    , KC_N , KC_S               , KC_MINUS    ,
-      KC_LGUI , MT(MOD_LALT, KC_SCLN) , KC_Q    , KC_J   , KC_K            , KC_X                 ,     KC_B                  , KC_M            , KC_W    , KC_V , MT(MOD_RALT, KC_Z) , KC_RCTL     ,
-                                                  MO(3)  , LT(1, KC_ENTER) , MT(MOD_LCTL, KC_TAB) ,     MT(MOD_LSFT, KC_BSPC) , LT(2, KC_SPACE) , XXXXXXX
+      TD(TD_ESC_GRV) , KC_QUOTE              , KC_COMM , KC_DOT , KC_P            , KC_Y                 ,     KC_F                  , KC_G            , KC_C    , KC_R , KC_L               , KC_SLASH    ,
+      KC_LSFT        , KC_A                  , KC_O    , KC_E   , KC_U            , KC_I                 ,     KC_D                  , KC_H            , KC_T    , KC_N , KC_S               , KC_MINUS    ,
+      KC_LGUI        , MT(MOD_LALT, KC_SCLN) , KC_Q    , KC_J   , KC_K            , KC_X                 ,     KC_B                  , KC_M            , KC_W    , KC_V , MT(MOD_RALT, KC_Z) , KC_RCTL     ,
+                                                         MO(3)  , LT(1, KC_ENTER) , MT(MOD_LCTL, KC_TAB) ,     MT(MOD_LSFT, KC_BSPC) , LT(2, KC_SPACE) , XXXXXXX
 ),
 
 //        ┌─────┬─────┬───┬─────┬─────┬─────┐   ┌─────┬───┬─────┬───┬───┬──────┐
@@ -54,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 //        ┌─────┬────┬──────┬──────┬──────┬─────┐   ┌──────┬──────┬──────┬──────┬─────┬─────┐
-//        │ no  │ no │  no  │ volu │  no  │ no  │   │ pgup │ home │  up  │ end  │ no  │ no  │
+//        │ no  │ no │  no  │ volu │ mply │ no  │   │ pgup │ home │  up  │ end  │ no  │ no  │
 //        ├─────┼────┼──────┼──────┼──────┼─────┤   ├──────┼──────┼──────┼──────┼─────┼─────┤
 //        │     │ no │ mprv │ vold │ mnxt │ no  │   │ pgdn │ left │ down │ rght │ no  │ no  │
 //        ├─────┼────┼──────┼──────┼──────┼─────┤   ├──────┼──────┼──────┼──────┼─────┼─────┤
@@ -63,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                          │      │      │     │   │      │      │      │
 //                          └──────┴──────┴─────┘   └──────┴──────┴──────┘
 [2] = LAYOUT_split_3x6_3(
-      XXXXXXX , XXXXXXX , XXXXXXX , KC_VOLU , XXXXXXX , XXXXXXX ,     KC_PGUP , KC_HOME , KC_UP   , KC_END   , XXXXXXX , XXXXXXX    ,
+      XXXXXXX , XXXXXXX , XXXXXXX , KC_VOLU , KC_MPLY , XXXXXXX ,     KC_PGUP , KC_HOME , KC_UP   , KC_END   , XXXXXXX , XXXXXXX    ,
       KC_TRNS , XXXXXXX , KC_MPRV , KC_VOLD , KC_MNXT , XXXXXXX ,     KC_PGDN , KC_LEFT , KC_DOWN , KC_RIGHT , XXXXXXX , XXXXXXX    ,
       XXXXXXX , XXXXXXX , XXXXXXX , KC_MUTE , XXXXXXX , XXXXXXX ,     KC_PSCR , XXXXXXX , XXXXXXX , KC_DEL   , KC_TRNS , KC_TRNS    ,
                                     _______ , _______ , _______ ,     _______ , _______ , _______
@@ -127,6 +138,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM -25;
         case LT(2,KC_SPACE):
             return TAPPING_TERM + 100;
+        case TD(TD_ESC_GRV):
+            return TAPPING_TERM - 50;
         default:
             return TAPPING_TERM;
     }
@@ -145,112 +158,7 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
             return false;
     }
 }
-// NOTE: Swaps slash/backslash when on linux
 
-uint16_t keycode_config(uint16_t keycode) {
-    switch (keycode) {
-        case KC_CAPS_LOCK:
-        case KC_LOCKING_CAPS_LOCK:
-            if (keymap_config.swap_control_capslock || keymap_config.capslock_to_control) {
-                return KC_LEFT_CTRL;
-            } else if (keymap_config.swap_escape_capslock) {
-                return KC_ESCAPE;
-            }
-            return keycode;
-        case KC_LEFT_CTRL:
-            if (keymap_config.swap_control_capslock) {
-                return KC_CAPS_LOCK;
-            }
-            if (keymap_config.swap_lctl_lgui) {
-                if (keymap_config.no_gui) {
-                    return KC_NO;
-                }
-                return KC_LEFT_GUI;
-            }
-            return KC_LEFT_CTRL;
-        case KC_LEFT_ALT:
-            if (keymap_config.swap_lalt_lgui) {
-                if (keymap_config.no_gui) {
-                    return KC_NO;
-                }
-                return KC_LEFT_GUI;
-            }
-            return KC_LEFT_ALT;
-        case KC_LEFT_GUI:
-            if (keymap_config.swap_lalt_lgui) {
-                return KC_LEFT_ALT;
-            }
-            if (keymap_config.swap_lctl_lgui) {
-                return KC_LEFT_CTRL;
-            }
-            if (keymap_config.no_gui) {
-                return KC_NO;
-            }
-            return KC_LEFT_GUI;
-        case KC_RIGHT_CTRL:
-            if (keymap_config.swap_rctl_rgui) {
-                if (keymap_config.no_gui) {
-                    return KC_NO;
-                }
-                return KC_RIGHT_GUI;
-            }
-            return KC_RIGHT_CTRL;
-        case KC_RIGHT_ALT:
-            if (keymap_config.swap_ralt_rgui) {
-                if (keymap_config.no_gui) {
-                    return KC_NO;
-                }
-                return KC_RIGHT_GUI;
-            }
-            return KC_RIGHT_ALT;
-        case KC_RIGHT_GUI:
-            if (keymap_config.swap_ralt_rgui) {
-                return KC_RIGHT_ALT;
-            }
-            if (keymap_config.swap_rctl_rgui) {
-                return KC_RIGHT_CTRL;
-            }
-            if (keymap_config.no_gui) {
-                return KC_NO;
-            }
-            return KC_RIGHT_GUI;
-        case KC_GRAVE:
-            if (keymap_config.swap_grave_esc) {
-                return KC_ESCAPE;
-            }
-            return KC_GRAVE;
-        case KC_ESCAPE:
-            if (keymap_config.swap_grave_esc) {
-                return KC_GRAVE;
-            } else if (keymap_config.swap_escape_capslock) {
-                return KC_CAPS_LOCK;
-            }
-            return KC_ESCAPE;
-        case KC_BACKSLASH:
-            if (keymap_config.swap_backslash_backspace) {
-                return KC_BACKSPACE;
-#ifdef OS_DETECTION_ENABLE
-            } else if (detected_host_os() == OS_WINDOWS) {
-                return KC_SLASH;
-#endif
-            }
-            return KC_BACKSLASH;
-#ifdef OS_DETECTION_ENABLE
-        case KC_SLASH:
-            if (detected_host_os() == OS_WINDOWS) {
-                return KC_BACKSLASH;
-            }
-            return KC_SLASH;
-#endif
-        case KC_BACKSPACE:
-            if (keymap_config.swap_backslash_backspace) {
-                return KC_BACKSLASH;
-            }
-            return KC_BACKSPACE;
-        default:
-            return keycode;
-    }
-}
 // NOTE: OLED Configuration
 
 #ifdef OLED_ENABLE
@@ -378,17 +286,6 @@ void oled_render_os(void) {
         case OS_IOS:
             oled_write_ln_P(PSTR("iOS"), false);
             break;
-#    if 0
-        case OS_WINDOWS_UNSURE:
-            oled_write_ln_P(PSTR("Windows?"), false);
-            break;
-        case OS_PS5:
-            oled_write_ln_P(PSTR("Sony"), false);
-            break;
-        case OS_HANDHELD:
-            oled_write_ln_P(PSTR("Handheld"), false);
-            break;
-#    endif
         case OS_UNSURE:
             oled_write_ln_P(PSTR("Unsure"), false);
             break;
