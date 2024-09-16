@@ -81,19 +81,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     _______ , _______ , _______ ,     _______ , _______ , _______
 ),
 
-//        ┌────┬────┬────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬────┬─────┬───────┐
-//        │ no │ no │ no │ no  │ no  │ no  │   │ no  │ no  │ no  │ no │ no  │ DF(4) │
-//        ├────┼────┼────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼────┼─────┼───────┤
-//        │ f1 │ f2 │ f3 │ f4  │ f5  │ f6  │   │ no  │ no  │ no  │ no │ no  │  no   │
-//        ├────┼────┼────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼────┼─────┼───────┤
-//        │ f7 │ f8 │ f9 │ f10 │ f11 │ f12 │   │ no  │ no  │ no  │ no │     │       │
-//        └────┴────┴────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼────┴─────┴───────┘
+//        ┌────┬────┬────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬────┬──────┬───────┐
+//        │ no │ no │ no │ no  │ no  │ no  │   │ no  │ no  │ no  │ no │  no  │ DF(4) │
+//        ├────┼────┼────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼────┼──────┼───────┤
+//        │ f1 │ f2 │ f3 │ f4  │ f5  │ f6  │   │ no  │ no  │ no  │ no │ ralt │ rctl  │
+//        ├────┼────┼────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼────┼──────┼───────┤
+//        │ f7 │ f8 │ f9 │ f10 │ f11 │ f12 │   │ no  │ no  │ no  │ no │ lalt │ lctl  │
+//        └────┴────┴────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼────┴──────┴───────┘
 //                       │     │     │     │   │     │     │     │
 //                       └─────┴─────┴─────┘   └─────┴─────┴─────┘
 [3] = LAYOUT_split_3x6_3(
       XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , DF(4)      ,
-      KC_F1   , KC_F2   , KC_F3   , KC_F4   , KC_F5   , KC_F6   ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX    ,
-      KC_F7   , KC_F8   , KC_F9   , KC_F10  , KC_F11  , KC_F12  ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_TRNS , KC_TRNS    ,
+      KC_F1   , KC_F2   , KC_F3   , KC_F4   , KC_F5   , KC_F6   ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_RALT , KC_RCTL    ,
+      KC_F7   , KC_F8   , KC_F9   , KC_F10  , KC_F11  , KC_F12  ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_LALT , KC_LCTL    ,
                                     _______ , _______ , _______ ,     _______ , _______ , _______
 ),
 
