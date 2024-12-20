@@ -97,36 +97,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     _______ , _______ , _______ ,     _______ , _______ , _______
 ),
 
-//        ┌─────┬──────┬───┬─────┬───────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬───────┐
-//        │ esc │  no  │ q │  w  │   e   │  r  │   │     │     │     │     │     │ DF(0) │
-//        ├─────┼──────┼───┼─────┼───────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼───────┤
-//        │ tab │ lsft │ a │  s  │   d   │  f  │   │     │     │     │     │     │       │
-//        ├─────┼──────┼───┼─────┼───────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼───────┤
-//        │ no  │ lctl │ z │  x  │   c   │  v  │   │     │     │     │     │     │       │
-//        └─────┴──────┴───┼─────┼───────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴───────┘
-//                         │     │ MO(5) │ spc │   │     │     │     │
-//                         └─────┴───────┴─────┘   └─────┴─────┴─────┘
+//        ┌─────┬──────┬───┬───────┬───┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬───────┐
+//        │ esc │  no  │ q │   w   │ e │  r  │   │     │     │     │     │     │ DF(0) │
+//        ├─────┼──────┼───┼───────┼───┼─────┤   ├─────┼─────┼─────┼─────┼─────┼───────┤
+//        │ tab │ lsft │ a │   s   │ d │  f  │   │     │     │     │     │     │       │
+//        ├─────┼──────┼───┼───────┼───┼─────┤   ├─────┼─────┼─────┼─────┼─────┼───────┤
+//        │ no  │ lctl │ z │   x   │ c │  v  │   │     │     │     │     │     │       │
+//        └─────┴──────┴───┼───────┼───┼─────┤   ├─────┼─────┼─────┼─────┴─────┴───────┘
+//                         │ MO(5) │ n │ spc │   │     │     │     │
+//                         └───────┴───┴─────┘   └─────┴─────┴─────┘
 [4] = LAYOUT_split_3x6_3(
-      KC_ESC  , XXXXXXX , KC_Q , KC_W    , KC_E  , KC_R   ,     KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , DF(0)      ,
-      KC_TAB  , KC_LSFT , KC_A , KC_S    , KC_D  , KC_F   ,     KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS    ,
-      XXXXXXX , KC_LCTL , KC_Z , KC_X    , KC_C  , KC_V   ,     KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS    ,
-                                 _______ , MO(5) , KC_SPC ,     _______ , _______ , _______
+      KC_ESC  , XXXXXXX , KC_Q , KC_W  , KC_E , KC_R   ,     KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , DF(0)      ,
+      KC_TAB  , KC_LSFT , KC_A , KC_S  , KC_D , KC_F   ,     KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS    ,
+      XXXXXXX , KC_LCTL , KC_Z , KC_X  , KC_C , KC_V   ,     KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS , KC_TRNS    ,
+                                 MO(5) , KC_N , KC_SPC ,     _______ , _______ , _______
 ),
 
-//        ┌────┬────┬────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬────┬────┬────┐
-//        │ no │ no │ no │ no  │ no  │ no  │   │ no  │ no  │ no  │ no │ no │ no │
-//        ├────┼────┼────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼────┼────┼────┤
-//        │ no │ 1  │ 2  │  3  │  4  │  5  │   │ no  │ no  │ no  │ no │ no │ no │
-//        ├────┼────┼────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼────┼────┼────┤
-//        │ no │ 6  │ 7  │  8  │  9  │  0  │   │ no  │ no  │ no  │ no │ no │ no │
-//        └────┴────┴────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼────┴────┴────┘
-//                       │     │     │     │   │     │     │     │
-//                       └─────┴─────┴─────┘   └─────┴─────┴─────┘
+//        ┌────┬───┬───┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬────┬────┬────┐
+//        │ no │ 1 │ 2 │  3  │  4  │  5  │   │ no  │ no  │ no  │ no │ no │ no │
+//        ├────┼───┼───┼─────┼─────┼─────┤   ├─────┼─────┼─────┼────┼────┼────┤
+//        │ b  │ 6 │ 7 │  8  │  9  │  0  │   │ no  │ no  │ no  │ no │ no │ no │
+//        ├────┼───┼───┼─────┼─────┼─────┤   ├─────┼─────┼─────┼────┼────┼────┤
+//        │ t  │ y │ u │  i  │  o  │  p  │   │ no  │ no  │ no  │ no │ no │ no │
+//        └────┴───┴───┼─────┼─────┼─────┤   ├─────┼─────┼─────┼────┴────┴────┘
+//                     │     │     │     │   │     │     │     │
+//                     └─────┴─────┴─────┘   └─────┴─────┴─────┘
 [5] = LAYOUT_split_3x6_3(
-      XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX    ,
-      XXXXXXX , KC_1    , KC_2    , KC_3    , KC_4    , KC_5    ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX    ,
-      XXXXXXX , KC_6    , KC_7    , KC_8    , KC_9    , KC_0    ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX    ,
-                                    _______ , _______ , _______ ,     _______ , _______ , _______
+      XXXXXXX , KC_1 , KC_2 , KC_3    , KC_4    , KC_5    ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX    ,
+      KC_B    , KC_6 , KC_7 , KC_8    , KC_9    , KC_0    ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX    ,
+      KC_T    , KC_Y , KC_U , KC_I    , KC_O    , KC_P    ,     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX    ,
+                              _______ , _______ , _______ ,     _______ , _______ , _______
 )
 };
 
